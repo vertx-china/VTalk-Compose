@@ -1,0 +1,164 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'kotlin-parcelize'
+}
+
+kapt {
+    correctErrorTypes = true
+    useBuildCache = true
+}
+
+android {
+    compileSdk 32
+
+    defaultConfig {
+        applicationId "com.vertx.china.vtalk.dejavu"
+        minSdk 26
+        targetSdk 32
+        versionCode 1
+        versionName "0.0.1"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary true
+        }
+    }
+
+    buildTypes {
+        internal {
+            shrinkResources true
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    kotlinOptions {
+        jvmTarget = '11'
+        useIR = true
+    }
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion compose_version
+    }
+    packagingOptions {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
+    }
+}
+
+dependencies {
+    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'com.google.android.material:material:1.5.0'
+    implementation 'androidx.activity:activity-compose:1.4.0'
+    implementation "androidx.collection:collection-ktx:1.2.0"
+    implementation "androidx.exifinterface:exifinterface:1.3.3"
+    implementation 'androidx.startup:startup-runtime:1.1.1'
+    implementation "androidx.navigation:navigation-compose:2.4.1"
+    implementation "androidx.datastore:datastore-preferences:1.0.0"
+    implementation "androidx.constraintlayout:constraintlayout:2.1.3"
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+
+    def koin_version = "3.1.4"
+    implementation "io.insert-koin:koin-core:$koin_version"
+    implementation "io.insert-koin:koin-android:$koin_version"
+    implementation "io.insert-koin:koin-android-compat:$koin_version"
+    implementation "io.insert-koin:koin-androidx-compose:$koin_version"
+
+    def coroutines = '1.6.0'
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines"
+
+    implementation "androidx.compose.material:material:$compose_version"
+    implementation "androidx.compose.ui:ui:$compose_version"
+    implementation "androidx.compose.ui:ui-util:$compose_version"
+    implementation "androidx.compose.ui:ui-viewbinding:$compose_version"
+    implementation "androidx.compose.ui:ui-tooling:$compose_version"
+    implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
+    implementation "androidx.compose.animation:animation:$compose_version"
+    implementation "androidx.compose.foundation:foundation:$compose_version"
+    implementation "androidx.compose.foundation:foundation-layout:$compose_version"
+    implementation "androidx.compose.material:material-icons-extended:$compose_version"
+
+    def md3 = '1.0.0-alpha06'
+    implementation "androidx.compose.material3:material3:$md3"
+
+    def lifecycle_version = "2.4.1"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycle_version"
+
+    def paging_version = "3.1.1"
+    implementation "androidx.paging:paging-common-ktx:$paging_version"
+    implementation "androidx.paging:paging-runtime-ktx:$paging_version"
+    implementation "androidx.paging:paging-compose:1.0.0-alpha14"
+
+
+    def accompanist = "0.23.1"
+    implementation "com.google.accompanist:accompanist-flowlayout:$accompanist"
+    implementation "com.google.accompanist:accompanist-insets:$accompanist"
+    implementation "com.google.accompanist:accompanist-insets-ui:$accompanist"
+    implementation "com.google.accompanist:accompanist-navigation-animation:$accompanist"
+    implementation "com.google.accompanist:accompanist-swiperefresh:$accompanist"
+    implementation "com.google.accompanist:accompanist-pager:$accompanist"
+    implementation "com.google.accompanist:accompanist-pager-indicators:$accompanist"
+    implementation "com.google.accompanist:accompanist-permissions:$accompanist"
+
+    // logger
+    implementation 'com.jakewharton.timber:timber:5.0.1'
+
+    // network
+//    implementation("com.squareup.retrofit2:retrofit:2.9.0") {
+//        exclude module: "okhttp"
+//    }
+    implementation "com.squareup.okhttp3:logging-interceptor:4.9.3"
+    implementation "com.squareup.okhttp3:okhttp:4.9.3"
+
+    // serialization
+    implementation 'com.google.code.gson:gson:2.9.0'
+//    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+
+    // image loader
+    def coil_version = '1.4.0'
+    implementation "io.coil-kt:coil:$coil_version"
+    implementation "io.coil-kt:coil-compose:$coil_version"
+    implementation "io.coil-kt:coil-gif:$coil_version"
+
+    // 3rd compose tool
+//    implementation "dev.chrisbanes.snapper:snapper:0.1.2"
+
+
+    // 3rd jvm libs
+    //implementation group: 'commons-io', name: 'commons-io', version: '2.11.0' // apache commons io
+    //implementation 'id.zelory:compressor:3.0.1'
+
+    // scarlet
+    // todo 为了 scarlet 先跑通，暂时先用了 RxJava，有空在换掉
+    implementation "io.reactivex.rxjava2:rxjava:2.2.21"
+    def scarlet_version = '0.1.12'
+    implementation("com.tinder.scarlet:scarlet:$scarlet_version")
+    implementation "com.tinder.scarlet:scarlet-core:$scarlet_version"
+    implementation "com.tinder.scarlet:message-adapter-built-in:$scarlet_version"
+    implementation "com.tinder.scarlet:scarlet-core-internal:$scarlet_version"
+    implementation "com.tinder.scarlet:stream-adapter-built-in:$scarlet_version"
+    implementation "com.tinder.scarlet:stream-adapter-coroutines:$scarlet_version"
+    implementation "com.tinder.scarlet:websocket-okhttp:$scarlet_version"
+    implementation "com.tinder.scarlet:message-adapter-gson:$scarlet_version"
+    implementation "com.tinder.scarlet:stream-adapter-rxjava2:$scarlet_version"
+
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
+    debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
+}

@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">VTalk</string>
+
+    <string name="jumpBottom">Jump to bottom</string>
+    <string name="members">%d members</string>
+    <string name="textfield_hint">Message #vertx group</string>
+    <string name="send">Send</string>
+    <string name="config_temp_chat_room_info">Config temp chat room info</string>
+
+
+    <!--    content description    -->
+
+    <string name="cd_attached_image">Attached image</string>
+    <string name="not_available">Functionality currently not available</string>
+    <string name="not_available_subtitle">Grab a beverage and check back later!</string>
+</resources>
